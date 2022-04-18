@@ -14,11 +14,17 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./helpers/jwt.interceptor";
 import {ErrorInterceptor} from "./helpers/error.interceptor";
 import {fakeBackendProvider} from "./helpers/fake-backend";
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {FilterPipe} from "./pipes/filer.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    HomePageComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,9 @@ import {fakeBackendProvider} from "./helpers/fake-backend";
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MatAutocompleteModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

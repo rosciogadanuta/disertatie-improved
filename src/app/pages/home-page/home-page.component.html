@@ -1,0 +1,43 @@
+<div class="background w-full h-full flex items-center justify-center">
+  <div class="w-3/4 h-3/4 rounded-xl bg-orange-50/90 flex flex-col">
+    <mat-toolbar class="rounded-t-xl flex justify-between bg-orange-50">
+    <div class="flex">
+      <div
+        class="text-orange-50 text-base font-normal bg-orange-600 p-2 rounded-xl mr-2">Exploareza biblioteca</div>
+      <div
+        class="text-orange-50 text-base font-normal bg-orange-600 p-2 rounded-xl mr-2">Intrebari frecvente</div>
+      <div
+        class="text-orange-50 text-base font-normal bg-orange-600 p-2 rounded-xl mr-2">Contacteaza-ne</div>
+    </div>
+      <div
+        (click)="logout()"
+        class="text-orange-50 text-base font-normal bg-orange-600 p-2 rounded-xl mr-2">Logout</div>
+    </mat-toolbar>
+    <div class="grow">
+      <div class="w-1/2 h-full flex items-center justify-center flex flex-col">
+        <div class="text-amber-900 text-7xl font-bold">
+          Biblioteca
+          <span class="block">Online</span>
+        </div>
+        <mat-form-field class="w-96">
+          <input type="text"
+                 placeholder="Cauta-ti cartea favorita..."
+                 matInput
+                 [(ngModel)]="searchText"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngIf="!searchText; else diplayMatOptions">Cauta-ti cartea favorita...</mat-option>
+            <ng-template #diplayMatOptions>
+              <mat-option *ngFor="let option of options | filter: searchText" [value]="option">
+                {{option.name}} - {{option.author}}
+              </mat-option>
+              <mat-option *ngIf="(options | filter: searchText).length === 0">
+                Niciun rezultat
+              </mat-option>
+            </ng-template>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,11 +30,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     // route functions
-
     function authenticate() {
       const { username, password } = body;
       const user = users.find(x => x.username === username && x.password === password);
-      if (!user) return error('Username or password is incorrect');
+
+      if (!user) return error('Username-ul sau parola sunt incorecte. Daca problema persista, contacteaza administratia Universitatii!');
+
       return ok({
         id: user.id,
         username: user.username,
@@ -50,7 +51,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     // helper functions
-
     function ok(body?) {
       return of(new HttpResponse({ status: 200, body }))
     }
