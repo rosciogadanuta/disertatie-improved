@@ -40,9 +40,10 @@ export class BookDetailsComponent implements OnInit {
     })
   }
 
-  reserveBook(){
+  reserveBook() {
     const dialogRef = this.dialog.open(ReserveBookDialogComponent, {
-      width: '250px',
+      width: '500px',
+      data: {book: this.book},
     });
 
     dialogRef.afterClosed().subscribe(result => {

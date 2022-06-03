@@ -4,5 +4,7 @@ export class User {
   password: string;
   firstName: string;
   lastName: string;
+  year?: string;
+  group?: string;
   token?: string;
 }

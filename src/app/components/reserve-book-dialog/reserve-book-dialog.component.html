@@ -1,12 +1,63 @@
 <div>
   <div class="w-full flex justify-end">
-    <mat-icon aria-hidden="false">close</mat-icon>
+    <mat-icon class="cursor-pointer" aria-hidden="false" (click)="onCloseDialog()">close</mat-icon>
   </div>
   <div class="w-full flex flex-col items-center mt-4">
-    <div>Formular de imprumut</div>
-    <div class="w-full">
-
+    <div class="text-2xl font-medium">Formular de imprumut</div>
+    <div *ngIf="!isSubmitted" class="w-full">
+      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+        <mat-form-field class="w-full mt-4 pill inside-label">
+          <label>
+            <input
+              placeholder="Nume"
+              autocomplete="off"
+              formControlName="firstName"
+              matInput
+              maxlength="64"
+            />
+          </label>
+        </mat-form-field>
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <input
+              placeholder="Prenume"
+              autocomplete="off"
+              formControlName="lastName"
+              matInput
+              maxlength="64"
+            />
+          </label>
+        </mat-form-field>
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <input
+              placeholder="Anul"
+              autocomplete="off"
+              formControlName="year"
+              matInput
+              maxlength="64"
+            />
+          </label>
+        </mat-form-field>
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <input
+              placeholder="Grupa"
+              autocomplete="off"
+              formControlName="group"
+              matInput
+              maxlength="64"
+            />
+          </label>
+        </mat-form-field>
+        <div class="w-full flex justify-center">
+          <button class="bg-emerald-900 text-white" mat-raised-button type="submit">Salveaza</button>
+        </div>
+      </form>
+    </div>
+    <div class="w-full justify-center p-4" *ngIf="isSubmitted">
+      <div class="text-center p-4 text-emerald-900 text-xl font-medium">Imprumutul tau a fost realizat cu succes!</div>
+      <div class="text-center">Poti sa iti ridici cartea cu acest cod: <span class="text-emerald-900 text-lg font-semibold">{{this.generatedCode}}</span> </div>
     </div>
   </div>
-
 </div>

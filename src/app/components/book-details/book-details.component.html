@@ -12,7 +12,10 @@
             {{author}}<span *ngIf="index !== book.authors.length - 1 ">,</span>
           </span></div>
         <div class="text-xs italic w-96">{{book?.description}}</div>
-        <button class=" rounded-full bg-emerald-900 text-white px-4 py-2" (click)="reserveBook()">Imprumuta</button>
+        <p class="text-base font-medium text-amber-900 ">Exemplare disponibile: {{book?.count}}</p>
+        <button
+          [disabled]="!book?.count"
+          class="rounded-full bg-emerald-900 text-white px-4 py-2" (click)="reserveBook()">Imprumuta</button>
       </div>
     </div>
   </div>

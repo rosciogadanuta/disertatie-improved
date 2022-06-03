@@ -9,17 +9,17 @@
         </div>
         <mat-form-field class="w-96">
           <input type="text"
-                 placeholder="Cauta-ti cartea favorita..."
+                 placeholder="Cauta-ti cartea sau autorul favorit..."
                  matInput
                  [(ngModel)]="searchText"
                  [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngIf="!searchText; else diplayMatOptions">Cauta-ti cartea favorita...</mat-option>
+            <mat-option *ngIf="!searchText; else diplayMatOptions">Cauta-ti cartea sau autorul favorit...</mat-option>
             <ng-template #diplayMatOptions>
-              <mat-option *ngFor="let option of options | filter: searchText" [value]="option">
-                {{option.name}} - {{option.author}}
+              <mat-option (click)="getBookDetails(option.id)" *ngFor="let option of books | filter: searchText" [value]="option">
+                {{option.name}} - {{option.authors[0]}} ...
               </mat-option>
-              <mat-option *ngIf="(options | filter: searchText).length === 0">
+              <mat-option *ngIf="(books | filter: searchText).length === 0">
                 Niciun rezultat
               </mat-option>
             </ng-template>
