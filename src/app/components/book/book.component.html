@@ -1,0 +1,17 @@
+<div class="w-36 h-72 m-10 flex flex-col items-center justify-between">
+  <img [src]="book?.image" class="h-48 cursor-pointer" (click)="seeBookDetails(book.id)">
+  <div class="w-full flex flex-col justify-center items-center cursor-pointer" (click)="seeBookDetails(book.id)">
+    <p class="text-xs p-1 text-center">
+      {{book?.name}}
+    </p>
+    <div *ngFor="let author of book?.authors" class="text-xs">
+      {{author}}
+    </div>
+    <p *ngIf="!book?.count" class="text-xs text-semibold text-orange-600 p-1">
+      Nu e in stoc
+    </p>
+    <p *ngIf="book?.count" class="text-xs text-semibold text-emerald-600 p-1">
+      In stoc
+    </p>
+  </div>
+</div>

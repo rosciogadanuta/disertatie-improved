@@ -1,0 +1,24 @@
+<mat-toolbar class="rounded-t-xl flex justify-between bg-orange-50">
+  <div class="flex">
+    <div
+      (click)="onHomePage()"
+      class="bg-emerald-900 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer"
+    >Acasa
+    </div>
+    <div
+      (click)="onExploreazaBiblioteca()"
+      class="bg-emerald-900 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer"
+    >Exploareza biblioteca
+    </div>
+    <div
+      class="bg-emerald-900 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer">Intrebari frecvente
+    </div>
+    <div
+      class="bg-emerald-900 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer">Contacteaza-ne
+    </div>
+  </div>
+  <div
+    (click)="logout()"
+    class="bg-emerald-900 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer">Logout
+  </div>
+</mat-toolbar>
