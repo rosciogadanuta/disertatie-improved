@@ -4,7 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../services/autentication.service";
 import {User} from "../../models/user";
 import * as uuid from 'uuid';
-import {BorrowBookService} from "../../services/borrowBook.service";
+import {BookService} from "../../services/book.service";
 
 @Component({
   selector: 'app-reserve-book-dialog',
@@ -22,7 +22,7 @@ export class ReserveBookDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) readonly dialogData: any,
     private readonly dialogRef: MatDialogRef<ReserveBookDialogComponent>,
     private readonly authenticationService: AuthenticationService,
-    private readonly borrowBookService: BorrowBookService
+    private readonly bookService: BookService
   ) {
     this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -38,14 +38,12 @@ export class ReserveBookDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    // if(this.formGroup.valid) {
-      console.log("here")
-      this.isSubmitted = true;
-      this.generatedCode = this.generateCode();
-      this.borrowBookService.borrowBook(this.composeBorrow()).subscribe((data)=>{
-        console.log(data)
-      })
-    // }
+
+      this.bookService.borrowBook(this.composeBorrow()).subscribe((data)=>{
+        this.generatedCode = this.generateCode();
+        this.isSubmitted = true;
+      });
+
   }
 
   private initForm() {
@@ -68,5 +66,13 @@ export class ReserveBookDialogComponent implements OnInit {
 
   private generateCode() {
     return uuid.v4();
+  }
+
+   getBooks() {
+    return JSON.parse(localStorage.getItem('books') as string);
+  }
+
+   setBooks(books) {
+    return localStorage.setItem('books',JSON.stringify(books));
   }
 }

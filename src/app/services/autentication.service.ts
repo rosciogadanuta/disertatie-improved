@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {User} from "../models/user";
 import {environment} from "../../environments/environment";
+import {books} from "../helpers/mock-data";
 
 
 @Injectable({ providedIn: 'root' })
@@ -25,6 +26,7 @@ export class AuthenticationService {
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('books', JSON.stringify(books));
         this.currentUserSubject.next(user);
         return user;
       }));
