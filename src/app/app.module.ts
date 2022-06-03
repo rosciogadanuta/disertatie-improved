@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -18,13 +18,27 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {FilterPipe} from "./pipes/filer.pipe";
+import { ExploreazaBibliotecaComponent } from './pages/exploreaza-biblioteca/exploreaza-biblioteca.component';
+import {NavBarComponent} from "./components/nav-bar/nav-bar.component";
+import { BookComponent } from './components/book/book.component';
+import { BookDetailsComponent } from './components/book-details/book-details.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { ReserveBookDialogComponent } from './components/reserve-book-dialog/reserve-book-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatIconModule} from "@angular/material/icon";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     HomePageComponent,
-    FilterPipe
+    FilterPipe,
+    ExploreazaBibliotecaComponent,
+    NavBarComponent,
+    BookComponent,
+    BookDetailsComponent,
+    ReserveBookDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +50,12 @@ import {FilterPipe} from "./pipes/filer.pipe";
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     MatToolbarModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -47,6 +64,7 @@ import {FilterPipe} from "./pipes/filer.pipe";
     // provider used to create fake backend
     fakeBackendProvider
   ],
+  schemas:[NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

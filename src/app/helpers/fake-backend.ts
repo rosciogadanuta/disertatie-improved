@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { users } from './mock-data';
+import {books, users} from './mock-data';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -13,7 +13,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // wrap in delayed observable to simulate server api call
     return of(null)
       .pipe(mergeMap(handleRoute))
-      .pipe(materialize()) // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
+      .pipe(materialize())
+      // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
       .pipe(delay(500))
       .pipe(dematerialize());
 
@@ -23,6 +24,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return authenticate();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
+        case url.endsWith('/books') && method === 'GET':
+          return getBooks();
+          case url.match(/\/book\/\d+$/) && method === 'GET':
+          return getBooksById();
         default:
           // pass through any requests not handled above
           return next.handle(request);
@@ -50,6 +55,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       return ok(users);
     }
 
+    function getBooks() {
+      if (!isLoggedIn()) return unauthorized();
+      return ok(books);
+    }
+
+    function getBooksById() {
+      if (!isLoggedIn()) return unauthorized();
+      const book = books.find(x => x.id === idFromUrl());
+      return ok(book);
+    }
+
     // helper functions
     function ok(body?) {
       return of(new HttpResponse({ status: 200, body }))
@@ -65,6 +81,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function isLoggedIn() {
       return headers.get('Authorization') === 'Bearer fake-jwt-token';
+    }
+
+    function idFromUrl() {
+      const urlParts = url.split('/');
+      return urlParts[urlParts.length - 1];
     }
   }
 }
