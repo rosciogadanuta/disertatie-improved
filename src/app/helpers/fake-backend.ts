@@ -9,8 +9,9 @@ import {
 } from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
 import {delay, mergeMap, materialize, dematerialize} from 'rxjs/operators';
-import {books, users} from './mock-data';
-import {Book} from "../models/book";
+import {users} from './mock-data';
+
+let books = JSON.parse(localStorage.getItem('books') as string) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -64,22 +65,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function borrowBook() {
-      // const {borrowBook} = body;
-      // const newBooks: Book[] = [];
-      //
-      // let foundedBook: Book = new Book();
-      //
-      // books.forEach(book => {
-      //   if (book.id === borrowBook.bookId) {
-      //     book.count = book.count - 1;
-      //     foundedBook = book;
-      //   }
-      //   newBooks.push(book);
-      // })
-      //
-      // books = newBooks;
-      //
-      return ok(books)
+      if (!isLoggedIn()) return unauthorized();
+
+      let borrowBook = body;
+      borrowBook.count = borrowBook.count - 1;
+
+      Object.assign(books.find(x => x.id === borrowBook.bookId), borrowBook);
+      localStorage.setItem('books', JSON.stringify(books));
+
+      return ok();
     }
 
     function getUsers() {
@@ -128,11 +122,3 @@ export let fakeBackendProvider = {
   useClass: FakeBackendInterceptor,
   multi: true
 };
-
-function getBooks():Book[] {
-  return JSON.parse(localStorage.getItem('books') || "[]");
-}
-
-function setBooks(books) {
-  return localStorage.setItem('books',JSON.stringify(books));
-}

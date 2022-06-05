@@ -38,41 +38,32 @@ export class ReserveBookDialogComponent implements OnInit {
   }
 
   onSubmit() {
-
-      this.bookService.borrowBook(this.composeBorrow()).subscribe((data)=>{
-        this.generatedCode = this.generateCode();
-        this.isSubmitted = true;
-      });
-
+    this.bookService.borrowBook(this.composeBorrow()).subscribe((data) => {
+      this.generatedCode = this.generateCode();
+      this.isSubmitted = true;
+    });
   }
 
   private initForm() {
     return new FormGroup({
-      firstName: new FormControl({value: this.currentUser.firstName, disabled:true},[Validators.required]),
-      lastName: new FormControl({value: this.currentUser.lastName, disabled:true}, [Validators.required]),
-      year: new FormControl({value: this.currentUser.year, disabled:true}, [Validators.required]),
-      group: new FormControl({value: this.currentUser.group, disabled:true}, [Validators.required]),
+      firstName: new FormControl({value: this.currentUser.firstName, disabled: true}, [Validators.required]),
+      lastName: new FormControl({value: this.currentUser.lastName, disabled: true}, [Validators.required]),
+      year: new FormControl({value: this.currentUser.year, disabled: true}, [Validators.required]),
+      group: new FormControl({value: this.currentUser.group, disabled: true}, [Validators.required]),
     });
   }
 
-  private composeBorrow(){
+  private composeBorrow() {
     return {
       userId: this.currentUser.id,
       bookId: this.dialogData.book.id as string,
       mentions: 'lalala',
+      count: this.dialogData.book.count as string,
       numberOfDays: 12,
     }
   }
 
   private generateCode() {
     return uuid.v4();
-  }
-
-   getBooks() {
-    return JSON.parse(localStorage.getItem('books') as string);
-  }
-
-   setBooks(books) {
-    return localStorage.setItem('books',JSON.stringify(books));
   }
 }

@@ -33,7 +33,6 @@ export class HomePageComponent {
   loadBooks() {
     this.bookService.getAll()
     .subscribe(data=>{
-      console.log(data)
       this.books = data;
     })
   }
