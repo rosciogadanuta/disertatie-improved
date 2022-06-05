@@ -7,4 +7,5 @@ export class User {
   year?: string;
   group?: string;
   token?: string;
+  //isAdmin: string;
 }

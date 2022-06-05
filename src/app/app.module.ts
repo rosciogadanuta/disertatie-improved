@@ -18,7 +18,6 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {FilterPipe} from "./pipes/filer.pipe";
-import { ExploreazaBibliotecaComponent } from './pages/exploreaza-biblioteca/exploreaza-biblioteca.component';
 import {NavBarComponent} from "./components/nav-bar/nav-bar.component";
 import { BookComponent } from './components/book/book.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
@@ -26,6 +25,10 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { ReserveBookDialogComponent } from './components/reserve-book-dialog/reserve-book-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatIconModule} from "@angular/material/icon";
+import { FaqComponent } from './pages/faq/faq.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import {ExploreLibraryComponent} from "./pages/explore-library/explore-library.component";
 
 
 @NgModule({
@@ -34,11 +37,13 @@ import {MatIconModule} from "@angular/material/icon";
     LoginPageComponent,
     HomePageComponent,
     FilterPipe,
-    ExploreazaBibliotecaComponent,
+    ExploreLibraryComponent,
     NavBarComponent,
     BookComponent,
     BookDetailsComponent,
-    ReserveBookDialogComponent
+    ReserveBookDialogComponent,
+    FaqComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatToolbarModule,
     MatAutocompleteModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

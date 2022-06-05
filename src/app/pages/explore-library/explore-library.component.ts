@@ -4,11 +4,11 @@ import {Book} from "../../models/book";
 import {finalize} from "rxjs";
 
 @Component({
-  selector: 'app-exploreaza-biblioteca',
-  templateUrl: './exploreaza-biblioteca.component.html',
-  styleUrls: ['./exploreaza-biblioteca.component.css']
+  selector: 'app-explore-library',
+  templateUrl: './explore-library.component.html',
+  styleUrls: ['./explore-library.component.css']
 })
-export class ExploreazaBibliotecaComponent implements OnInit {
+export class ExploreLibraryComponent implements OnInit {
 
   books: Book[] = [];
   isLoading = false;

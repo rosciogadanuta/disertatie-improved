@@ -50,7 +50,22 @@
             />
           </label>
         </mat-form-field>
-        <div class="w-full flex justify-center">
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <input
+              type="number"
+              placeholder="Numar de zile"
+              autocomplete="off"
+              formControlName="numberOfDays"
+              matInput
+              maxlength="64"
+            />
+          </label>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.numberOfDays.errors?.required">Acest camp este obligatoriu.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.numberOfDays.errors?.max">Poti imprumuta cartea pentru maxim 21 de zile.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.numberOfDays.errors?.min">Trebuie sa imprumuti cartea pentru cel putin o zi.</mat-error>
+        </mat-form-field>
+        <div class="w-full flex justify-center mt-8">
           <button class="bg-emerald-900 text-white" mat-raised-button type="submit">Salveaza</button>
         </div>
       </form>

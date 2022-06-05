@@ -4,4 +4,5 @@ export class BorrowBook {
   bookId: string;
   mentions: string;
   numberOfDays: number;
+  generatedCode?: string;
 }

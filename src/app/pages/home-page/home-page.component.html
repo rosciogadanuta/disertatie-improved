@@ -1,22 +1,23 @@
 <div class="background w-full h-full flex items-center justify-center">
   <div class="w-3/4 h-3/4 rounded-xl bg-orange-50/90 flex flex-col">
     <app-nav-bar></app-nav-bar>
-    <div class="grow">
+    <div class="grow w-full flex">
       <div class="w-1/2 h-full flex items-center justify-center flex flex-col">
         <div class="w-96 mb-8 text-amber-900 text-7xl font-bold">
           Biblioteca
           <span class="block">Online</span>
         </div>
         <mat-form-field class="w-96">
-          <input type="text"
-                 placeholder="Cauta-ti cartea sau autorul favorit..."
+          <input [(ngModel)]="searchText"
+                 [matAutocomplete]="auto"
                  matInput
-                 [(ngModel)]="searchText"
-                 [matAutocomplete]="auto">
+                 placeholder="Cauta-ti cartea sau autorul favorit..."
+                 type="text">
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngIf="!searchText; else diplayMatOptions">Cauta-ti cartea sau autorul favorit...</mat-option>
             <ng-template #diplayMatOptions>
-              <mat-option (click)="getBookDetails(option.id)" *ngFor="let option of books | filter: searchText" [value]="option">
+              <mat-option (click)="getBookDetails(option.id)" *ngFor="let option of books | filter: searchText"
+                          [value]="option">
                 {{option.name}} - {{option.authors[0]}} ...
               </mat-option>
               <mat-option *ngIf="(books | filter: searchText).length === 0">
@@ -25,6 +26,11 @@
             </ng-template>
           </mat-autocomplete>
         </mat-form-field>
+      </div>
+      <div class="w-1/2 flex items-center justify-center flex flex-col">
+        <img
+          class="h-96"
+          src="https://www.utm.ro/wp-content/uploads/2021/03/logo-UTM.png">
       </div>
     </div>
   </div>

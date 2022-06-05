@@ -21,8 +21,16 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  onExploreazaBiblioteca(){
-    this.router.navigate(['/exploreaza-biblioteca']);
+  onExploreLibrary(){
+    this.router.navigate(['/explore-library']);
+  }
+
+  onFAQ() {
+    this.router.navigate(['/faq']);
+  }
+
+  onContactUs() {
+    this.router.navigate(['/contact-us']);
   }
 
   logout() {

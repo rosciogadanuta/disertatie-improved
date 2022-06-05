@@ -39,7 +39,7 @@ export class ReserveBookDialogComponent implements OnInit {
 
   onSubmit() {
     this.bookService.borrowBook(this.composeBorrow()).subscribe((data) => {
-      this.generatedCode = this.generateCode();
+      this.generatedCode = data.generatedCode;
       this.isSubmitted = true;
     });
   }
@@ -50,6 +50,7 @@ export class ReserveBookDialogComponent implements OnInit {
       lastName: new FormControl({value: this.currentUser.lastName, disabled: true}, [Validators.required]),
       year: new FormControl({value: this.currentUser.year, disabled: true}, [Validators.required]),
       group: new FormControl({value: this.currentUser.group, disabled: true}, [Validators.required]),
+      numberOfDays: new FormControl({value: this.dialogData.book.count, disabled: false}, [Validators.required, Validators.max(21),  Validators.min(1)])
     });
   }
 
@@ -61,9 +62,5 @@ export class ReserveBookDialogComponent implements OnInit {
       count: this.dialogData.book.count as string,
       numberOfDays: 12,
     }
-  }
-
-  private generateCode() {
-    return uuid.v4();
   }
 }

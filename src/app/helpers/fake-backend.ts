@@ -10,6 +10,7 @@ import {
 import {Observable, of, throwError} from 'rxjs';
 import {delay, mergeMap, materialize, dematerialize} from 'rxjs/operators';
 import {users} from './mock-data';
+import * as uuid from 'uuid';
 
 let books = JSON.parse(localStorage.getItem('books') as string) || [];
 
@@ -69,11 +70,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       let borrowBook = body;
       borrowBook.count = borrowBook.count - 1;
+      borrowBook.generatedCode = uuid.v4();
 
       Object.assign(books.find(x => x.id === borrowBook.bookId), borrowBook);
       localStorage.setItem('books', JSON.stringify(books));
 
-      return ok();
+      return ok(borrowBook);
     }
 
     function getUsers() {

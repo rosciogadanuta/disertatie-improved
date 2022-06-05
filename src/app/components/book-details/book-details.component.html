@@ -2,21 +2,27 @@
   <div class="w-3/4 h-3/4 rounded-xl bg-orange-50/90 flex flex-col overflow-auto overflow-auto ">
     <app-nav-bar></app-nav-bar>
     <mat-spinner class="m-auto" *ngIf="isLoading"></mat-spinner>
-    <div *ngIf="!isLoading"class="flex p-10">
-      <img [src]="book?.image" class="h-96 w-72">
-      <div class="h-96 px-8 flex flex-col justify-between">
-        <p class="text-3xl font-medium text-amber-900">{{book?.name}}</p>
-        <div class=" text-l font-medium text-amber-700">
-          <span class="text-base font-medium text-amber-900">Autori: </span>
-          <span *ngFor="let author of book?.authors;let index = index">
+    <div *ngIf="!isLoading">
+      <button class="flex mt-5 ml-10 rounded-xl text-white px-4 py-2 bg-emerald-900" (click)="onBack()">
+        <mat-icon class="text-white mr-2">arrow_back</mat-icon>Inapoi</button>
+      <div  class="flex pt-5 p-10">
+        <img [src]="book?.image" class="h-96 w-72">
+        <div class="h-96 px-8 flex flex-col justify-between">
+          <p class="text-3xl font-medium text-amber-900">{{book?.name}}</p>
+          <div class=" text-l font-medium text-amber-700">
+            <span class="text-base font-medium text-amber-900">Autori: </span>
+            <span *ngFor="let author of book?.authors;let index = index">
             {{author}}<span *ngIf="index !== book.authors.length - 1 ">,</span>
           </span></div>
-        <div class="text-xs italic w-96">{{book?.description}}</div>
-        <p class="text-base font-medium text-amber-900 ">Exemplare disponibile: {{book?.count}}</p>
-        <button
-          [disabled]="!book?.count"
-          class="rounded-full bg-emerald-900 text-white px-4 py-2" (click)="reserveBook()">Imprumuta</button>
+          <div class="text-xs italic w-96">{{book?.description}}</div>
+          <p class="text-base font-medium text-amber-900">Exemplare disponibile: {{book?.count}}</p>
+          <button
+            [disabled]="$any(book?.count) <= 0"
+            [ngClass]="$any(book?.count) <= 0 ? 'bg-gray-400' : 'bg-emerald-900'"
+            class="rounded-full text-white px-4 py-2" (click)="reserveBook()">Imprumuta</button>
+        </div>
       </div>
     </div>
+
   </div>
 </div>

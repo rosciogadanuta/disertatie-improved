@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Book} from "../../models/book";
 import {BookService} from "../../services/book.service";
 import {finalize} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {ReserveBookDialogComponent} from "../reserve-book-dialog/reserve-book-dialog.component";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-book-details',
@@ -19,7 +20,8 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly bookService: BookService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly location: Location
   ) {
   }
 
@@ -45,8 +47,9 @@ export class BookDetailsComponent implements OnInit {
       width: '500px',
       data: {book: this.book},
     });
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  onBack() {
+    this.location.back();
   }
 }
