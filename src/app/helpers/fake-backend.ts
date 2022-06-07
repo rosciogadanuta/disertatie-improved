@@ -84,8 +84,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function getBooks() {
+      console.log(books)
       if (!isLoggedIn()) return unauthorized();
-      return ok(books);
+      return ok(JSON.parse(localStorage.getItem('books') as string));
     }
 
     function getBooksById() {

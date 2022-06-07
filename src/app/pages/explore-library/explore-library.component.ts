@@ -26,7 +26,9 @@ export class ExploreLibraryComponent implements OnInit {
     this.bookService.getAll().pipe(
       finalize(()=> this.isLoading = false)
     ).subscribe(data=>{
+      console.log("here")
       this.books = data;
+      console.log(this.books)
     })
   }
 }

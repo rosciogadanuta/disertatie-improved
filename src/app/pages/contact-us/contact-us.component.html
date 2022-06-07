@@ -1,0 +1,69 @@
+<div class="background w-full h-full flex items-center justify-center">
+  <div class="w-3/4 h-3/4 rounded-xl bg-orange-50/90 flex flex-col overflow-auto overflow-auto ">
+    <app-nav-bar></app-nav-bar>
+    <div class="p-10 w-full h-full flex">
+      <div class="w-1/2 flex items-center justify-center">
+        <mat-card class="bg-amber-50">
+          <form (ngSubmit)="onSumbit()" [formGroup]="formGroup">
+            <mat-form-field class="w-full mt-4 pill inside-label">
+              <label>
+                <input
+                  placeholder="Nume"
+                  autocomplete="off"
+                  formControlName="name"
+                  matInput
+                />
+              </label>
+              <mat-error class="error text-red-600" *ngIf="formGroup.controls.name.errors?.required">Acest camp este obligatoriu.</mat-error>
+              <mat-error class="error text-red-600" *ngIf="formGroup.controls.name.errors?.minlength">Trebuie sa ai cel putin 3 caractere.</mat-error>
+              <mat-error class="error text-red-600" *ngIf="formGroup.controls.name.errors?.maxlength">Prea multe caractere introduse.</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full pill inside-label">
+              <label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  autocomplete="off"
+                  formControlName="email"
+                  matInput
+                  maxlength="64"
+                />
+              </label>
+              <mat-error class="error text-red-600" *ngIf="formGroup.controls.email.errors?.required">Acest camp este obligatoriu.</mat-error>
+              <mat-error class="error text-red-600" *ngIf="formGroup.controls.email.errors?.email">Email-ul trebuie sa fie valid.</mat-error>
+              <mat-error class="error text-red-600" *ngIf="formGroup.controls.email.errors?.maxlength">Prea multe caractere introduse.</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full pill inside-label">
+              <label>
+              <textarea
+                class="resize-none"
+                placeholder="Mesaj"
+                autocomplete="off"
+                formControlName="message"
+                matInput
+                maxlength="250"
+                rows="5"
+                cols="10"
+              >
+              </textarea>
+              </label>
+              <mat-error class="error text-red-600" *ngIf="formGroup.controls.message.errors?.required">Acest camp este obligatoriu.</mat-error>
+              <mat-error class="error text-red-600" *ngIf="formGroup.controls.message.errors?.maxlength">Poti introduce maxim 200 caractere.</mat-error>
+            </mat-form-field>
+            <div class="w-full flex justify-center mt-8">
+              <button class="bg-emerald-900 text-white" mat-raised-button type="submit">Trimite</button>
+            </div>
+          </form>
+        </mat-card>
+
+      </div>
+      <div class="w-1/2 flex items-center">
+        <mat-card class="bg-amber-50">
+          <p class="text-zinc-600">Adresa: <span class="italic text-zinc-600">Calea Văcăreşti, nr. 189, corpul M, parter (intrare după Clinica Regina Maria)
+            Sector 4, Bucureşti</span></p>
+          <p class="text-zinc-600">Email: <span class="italic text-zinc-600">international@univ.utm.ro/erasmus@univ.utm.ro</span></p>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

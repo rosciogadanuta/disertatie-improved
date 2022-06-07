@@ -1,0 +1,67 @@
+<div class="background w-full h-full flex items-center justify-center">
+  <div class="w-3/4 h-3/4 rounded-xl bg-orange-50/90 flex flex-col overflow-auto overflow-auto ">
+    <app-nav-bar></app-nav-bar>
+    <div class="flex p-8 flex-wrap w-full justify-center items-center">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Cum pot imprumuta o carte?
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>Acceseaza sectiunea "Exploreaza Biblioteca" si alegeti o carte preferata. O poti imprumuta accesand
+            formularul de imprumut. Acum, cu codul generat iti poti ridica cartea fizic din biblioteca facultatii.</p>
+        </mat-expansion-panel>
+        <div class="mt-8">
+          <mat-expansion-panel (closed)="panelOpenState = false"
+                               (opened)="panelOpenState = true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Care este perioada valabila de imprumut?
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Poti imprumuta cartea de la o zi pana la 3 saptamani (21 de zile). Te rugam sa respecti termenele de
+              imprumut, tinand cont ca sunt colegi dornici sa imprumute aceleasi resurse ca si tine.</p>
+          </mat-expansion-panel>
+        </div>
+        <div class="mt-8">
+          <mat-expansion-panel (closed)="panelOpenState = false"
+                               (opened)="panelOpenState = true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Ce se intampla daca depasesc termenul de imprumut?
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Evita acest lucru! In cazul in care vei depasi perioada de imprumut, vei plati o taxa de 2 lei/zi pentru
+              fiecare zi de intarziere.</p>
+          </mat-expansion-panel>
+        </div>
+        <div class="mt-8">
+          <mat-expansion-panel (closed)="panelOpenState = false"
+                               (opened)="panelOpenState = true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Ce se intampla daca pierd o carte?
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Nu ne dorim acest lucru, insa daca ai pierdut una din resursele ce apartin facultatii, vei fi nevoit sa
+              achiti o taxa in valoarea cartii pierdute. Ai mare grija de cartile imprumutate!</p>
+          </mat-expansion-panel>
+        </div>
+        <div class="mt-8">
+          <mat-expansion-panel (closed)="panelOpenState = false"
+                               (opened)="panelOpenState = true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Cum efectuez o returnare a cartii?
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Cand nu mai ai nevoie de cartile imprumutate, te rugam sa te prezinti la biblioteca cu resursele, iar
+              doamnele bibliotecare se vor ocupa de returul tau</p>
+          </mat-expansion-panel>
+        </div>
+      </mat-accordion>
+      <p class="w-full text-left ml-14 mt-8 italic">Daca niciuna din intrebarile tale nu se regasesc aici, te rugam sa accesezi sectiunea "Contacteaza-ne" si te vom ajuta.</p>
+    </div>
+  </div>
+</div>
