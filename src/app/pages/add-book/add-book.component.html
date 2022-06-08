@@ -1,0 +1,104 @@
+<div class="background w-full h-full flex flex-col items-center justify-center">
+  <div class="relative w-3/4 h-5/6 rounded-xl bg-orange-50/90 flex flex-col overflow-auto overflow-auto ">
+    <app-nav-bar class="sticky top-0"></app-nav-bar>
+    <div *ngIf="!isSubmitted" class="w-full flex flex-col items-center p-8">
+      <div class="w-full text-center text-2xl font-medium text-amber-900">Adauga o noua carte</div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="w-1/2">
+        <mat-form-field class="w-full mt-4 pill inside-label">
+          <label>
+            <input
+              placeholder="Nume carte"
+              autocomplete="off"
+              formControlName="name"
+              matInput
+              maxlength="64"
+            />
+          </label>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.name.errors?.required">Acest camp este obligatoriu.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.name.errors?.maxlength">Maxim 64 de caratere permise.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.name.errors?.minlength">Minim 3 caractere trebuie introduse.</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <input
+              placeholder="Nume autori:"
+              autocomplete="off"
+              formControlName="author"
+              matInput
+              maxlength="64"
+            />
+          </label>
+          <mat-hint>Daca sunt mai multi autori, enumera-i folosind virgula ","</mat-hint>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.author.errors?.required">Acest camp este obligatoriu.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.author.errors?.maxlength">Maxim 64 de caratere permise.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.author.errors?.minlength">Minim 3 caractere trebuie introduse.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <ngx-mat-file-input  formControlName="image" [accept]="accept">
+          </ngx-mat-file-input>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.image.errors?.required">Acest camp este obligatoriu.</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <input
+              placeholder="Descriere"
+              autocomplete="off"
+              formControlName="description"
+              matInput
+              maxlength="200"
+            />
+          </label>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.description.errors?.required">Acest camp este obligatoriu.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.description.errors?.maxlength">Maxim 64 de caratere permise.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.description.errors?.minlength">Minim 3 caractere trebuie introduse.</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <input
+              type="number"
+              placeholder="Numar de exemplare"
+              autocomplete="off"
+              formControlName="count"
+              matInput
+            />
+          </label>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.count.errors?.required">Acest camp este obligatoriu.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.count.errors?.max">Maxim 20 de exemplare.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.count.errors?.min">Minim 1 exemplar.</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <mat-select
+              placeholder="Genul cartii"
+              autocomplete="off"
+              formControlName="type"
+              matInput
+            >
+              <mat-option  value="inteligentaArtificiala">Inteligenta artificiala</mat-option>
+              <mat-option value="programa">Programa facultatii</mat-option>
+              <mat-option value="tehnologie">Tehnologie</mat-option>
+            </mat-select>
+          </label>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.type.errors?.required">Acest camp este obligatoriu.</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full pill inside-label">
+          <label>
+            <input
+              type="number"
+              placeholder="Editie"
+              autocomplete="off"
+              formControlName="edition"
+              matInput
+            />
+          </label>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.edition.errors?.required">Acest camp este obligatoriu.</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.edition.errors?.max">Trebuie sa fie un an valabil(maxim 2022).</mat-error>
+          <mat-error class="error text-red-600" *ngIf="formGroup.controls.edition.errors?.min">Trebuie sa fie un an valabil(minim 1990).</mat-error>
+        </mat-form-field>
+        <div class="w-full flex justify-center mt-8">
+          <button class="bg-emerald-900 text-white" mat-raised-button type="submit">Salveaza</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

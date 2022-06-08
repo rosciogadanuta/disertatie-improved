@@ -4,7 +4,7 @@ import {Book} from "../../models/book";
 import {BookService} from "../../services/book.service";
 import {finalize} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
-import {ReserveBookDialogComponent} from "../reserve-book-dialog/reserve-book-dialog.component";
+import {ReserveBookDialogComponent} from "../../components/reserve-book-dialog/reserve-book-dialog.component";
 import {Location} from '@angular/common';
 
 @Component({

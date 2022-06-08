@@ -1,10 +1,36 @@
-<div class="background w-full h-full flex items-center justify-center">
-  <div class="w-3/4 h-3/4 rounded-xl bg-orange-50/90 flex flex-col overflow-auto overflow-auto ">
+<div class="bg-scroll background w-full h-full flex items-center justify-center">
+  <div class="w-3/4 h-5/6 rounded-xl bg-orange-50/90 flex flex-col overflow-auto overflow-auto ">
     <app-nav-bar></app-nav-bar>
     <mat-spinner class="m-auto" *ngIf="isLoading"></mat-spinner>
-    <div class="flex flex-wrap">
-      <div *ngFor="let book of books">
-        <app-book [book]="book"></app-book>
+    <div *ngIf="!isLoading" class="flex flex-wrap flex-col">
+      <div class="w-full flex justify-center p-8">
+        <div class="w-1/2">
+          <mat-accordion class="example-headers-align">
+            <mat-expansion-panel class="bg-orange-50">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="flex justify-center text-zinc-600">
+                  Filtreaza    <mat-icon class="pl-2">filter_list</mat-icon>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <mat-form-field appearance="fill">
+                <mat-label>First name</mat-label>
+                <input matInput>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Age</mat-label>
+                <input matInput type="number" min="1">
+              </mat-form-field>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+      <div class="flex flex-wrap">
+        <div *ngFor="let book of books">
+          <app-book [book]="book"></app-book>
+        </div>
       </div>
     </div>
   </div>

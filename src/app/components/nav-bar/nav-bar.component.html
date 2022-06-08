@@ -18,9 +18,19 @@
       class="bg-emerald-900 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer"
     (click)="onContactUs()">Contacteaza-ne
     </div>
+    <div
+      *ngIf="isAdmin"
+      class="bg-emerald-600 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer"
+      (click)="onAddBook()">Admin: Adauga carte
+    </div>
+    <div
+      *ngIf="isAdmin"
+      class="bg-emerald-600 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer"
+      (click)="onDeleteBook()">Admin: Sterge carte
+    </div>
   </div>
-  <div
-    (click)="logout()"
-    class="bg-emerald-900 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer">Logout
+  <div class="flex items-center">
+  <div (click)="logout()"
+       class="bg-emerald-900 text-white text-base font-normal  p-2 rounded-xl mr-2 cursor-pointer"> Logout</div>
   </div>
 </mat-toolbar>

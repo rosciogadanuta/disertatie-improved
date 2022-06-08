@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-contact-us',
@@ -9,6 +9,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class ContactUsComponent implements OnInit {
 
   formGroup:FormGroup;
+  isSumbitted = false;
 
   constructor() {
     this.formGroup = this.initForm();
@@ -21,12 +22,28 @@ export class ContactUsComponent implements OnInit {
     return new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]),
       email:new FormControl('', [Validators.required, Validators.email, Validators.maxLength(64)]),
-      message:new FormControl('', [Validators.required, Validators.email, Validators.maxLength(200)]),
+      message:new FormControl('', [Validators.required, Validators.maxLength(200)]),
       }
     )
   }
 
-  onSumbit(){
+  onSubmit(formDirective: FormGroupDirective) {
     console.log(this.formGroup)
+    if(this.formGroup.valid) {
+      console.log(this.formGroup);
+      formDirective.resetForm();
+      this.formGroup.reset();
+      this.isSumbitted = true;
+      setTimeout(()=> this.isSumbitted = false, 3000);
+    }
+  }
+
+  private resetForm() {
+    this.formGroup.reset({
+      'name': '',
+      'email': '',
+      'message': '',
+
+    });
   }
 }

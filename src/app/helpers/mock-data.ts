@@ -1,8 +1,19 @@
 import {User} from "../models/user";
 import {Book} from "../models/book";
+import {Role} from "../models/role";
 
 export const users: User[] =
-  [{ id: 1, username: 'test', password: 'test', firstName: 'Popescu', lastName: 'Maria', year: 'II', group:'203' }];
+  [{
+    id: 1,
+    username: 'test',
+    password: 'test',
+    firstName: 'Popescu',
+    lastName: 'Maria',
+    role: Role.User,
+    year: 'II',
+    group: '203'
+  }, {id: 2, username: 'admin', password: 'admin', firstName: 'Dumitru', lastName: 'Lucretia', role: Role.Admin}]
+
 
 export const books: Book[] = [
   {

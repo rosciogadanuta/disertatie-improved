@@ -5,4 +5,7 @@ export class Book {
   image: string;
   description: string;
   count: number;
+  type? :string;
+  edition?: string;
+  code?: string;
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/autentication.service";
+import {User} from "../../models/user";
+import {Role} from "../../models/role";
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,12 +11,19 @@ import {AuthenticationService} from "../../services/autentication.service";
 })
 export class NavBarComponent implements OnInit {
 
+  currentUser: User;
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
   onHomePage() {
@@ -31,6 +40,13 @@ export class NavBarComponent implements OnInit {
 
   onContactUs() {
     this.router.navigate(['/contact-us']);
+  }
+  onAddBook(){
+    this.router.navigate(['/add-book']);
+  }
+
+  onDeleteBook(){
+    this.router.navigate(['/delete-book']);
   }
 
   logout() {
