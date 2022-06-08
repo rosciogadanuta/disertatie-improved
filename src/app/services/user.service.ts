@@ -11,4 +11,8 @@ export class UserService {
   getAll() {
     return this.http.get<User[]>(`${environment.apiUrl}/users`);
   }
+
+  getBeeUsers() {
+    return this.http.get<User[]>(`https://beeceptor.com/console/online-library`);
+  }
 }

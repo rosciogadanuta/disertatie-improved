@@ -12,8 +12,6 @@ import {delay, mergeMap, materialize, dematerialize} from 'rxjs/operators';
 import {users} from './mock-data';
 import * as uuid from 'uuid';
 
-let books = JSON.parse(localStorage.getItem('books') as string) || [];
-
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
 
@@ -32,8 +30,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       switch (true) {
         case url.endsWith('/users/authenticate') && method === 'POST':
           return authenticate();
-        case url.endsWith('/borrowBook') && method === 'POST':
+        case url.endsWith('/borrowBook') && method === 'PUT':
           return borrowBook();
+        case url.endsWith('/add-book') && method === 'POST':
+          return addBook();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
         case url.endsWith('/books') && method === 'GET':
@@ -66,10 +66,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       })
     }
 
+    function addBook() {
+      if (!isLoggedIn()) return unauthorized();
+
+      let book = body;
+
+      console.log(body)
+
+      let books = JSON.parse(localStorage.getItem('books') as string);
+
+      books.push(book);
+      localStorage.setItem('books', JSON.stringify(books));
+
+      return ok(JSON.parse(localStorage.getItem('books') as string));
+    }
+
     function borrowBook() {
       if (!isLoggedIn()) return unauthorized();
 
       let borrowBook = body;
+      let books = JSON.parse(localStorage.getItem('books') as string);
+
       borrowBook.count = borrowBook.count - 1;
       borrowBook.generatedCode = uuid.v4();
 
@@ -85,12 +102,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function getBooks() {
-      console.log(books)
       if (!isLoggedIn()) return unauthorized();
       return ok(JSON.parse(localStorage.getItem('books') as string));
     }
 
     function getBooksById() {
+      let books = JSON.parse(localStorage.getItem('books') as string);
       if (!isLoggedIn()) return unauthorized();
       const book = books.find(x => x.id === idFromUrl());
       return ok(book);

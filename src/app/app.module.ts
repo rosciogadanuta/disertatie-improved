@@ -33,6 +33,7 @@ import {AddBookComponent} from './pages/add-book/add-book.component';
 import {DeleteBookComponent} from './pages/delete-book/delete-book.component';
 import {MatSelectModule} from "@angular/material/select";
 import {NgxMatFileInputModule} from "@angular-material-components/file-input";
+import { AddBookDialogComponent } from './components/add-book-dialog/add-book-dialog.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {NgxMatFileInputModule} from "@angular-material-components/file-input";
     FaqComponent,
     ContactUsComponent,
     AddBookComponent,
-    DeleteBookComponent
+    DeleteBookComponent,
+    AddBookDialogComponent
   ],
   imports: [
     BrowserModule,

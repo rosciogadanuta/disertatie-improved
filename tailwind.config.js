@@ -7,7 +7,7 @@ module.exports = {
     './src/app/components/nav-bar/nav-bar.component.html',
     './src/app/components/book/book.component.html',
     './src/app/components/reserve-book-dialog/reserve-book-dialog.component.html',
-    './src/app/components/book-details/book-details.component.html',
+    './src/app/pages/book-details/book-details.component.html',
     './src/app/pages/add-book/add-book.component.html',
     './src/app/pages/delete-book/delete-book.component.html',
     './src/app/pages/login-page/login-page.component.html',

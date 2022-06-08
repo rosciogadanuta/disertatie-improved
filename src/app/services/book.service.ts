@@ -7,7 +7,8 @@ import {BorrowBook} from "../models/borrowBook";
 
 @Injectable({providedIn: 'root'})
 export class BookService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getAll() {
     return this.http.get<Book[]>(`${environment.apiUrl}/books`);
@@ -17,7 +18,11 @@ export class BookService {
     return this.http.get<Book>(`${environment.apiUrl}/book/${id}`);
   }
 
-  borrowBook(borrowBook:BorrowBook) {
-    return this.http.post<any>(`${environment.apiUrl}/borrowBook`, borrowBook);
+  addBook(book: Book) {
+    return this.http.post<any>(`${environment.apiUrl}/add-book`, book);
+  }
+
+  borrowBook(borrowBook: BorrowBook) {
+    return this.http.put<any>(`${environment.apiUrl}/borrowBook`, borrowBook);
   }
 }

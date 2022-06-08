@@ -1,0 +1,11 @@
+<div>
+  <div class="w-full flex justify-end">
+    <mat-icon class="cursor-pointer" aria-hidden="false" (click)="onCloseDialog()">close</mat-icon>
+  </div>
+  <div class="w-full flex flex-col items-center justify-center m-8">
+    <div class="w-full justify-center p-4">
+      <div class="text-center p-4 text-emerald-900 text-xl font-medium">Cartea a fost adaugata cu succes!</div>
+      <div class="text-center">Va rugam sa va asigurati ca imprimati si lipiti codul urmator: <span class="text-emerald-900 text-lg font-semibold">{{this.dialogData.generatedCode}}</span> pe spatele cartii! </div>
+    </div>
+  </div>
+</div>
