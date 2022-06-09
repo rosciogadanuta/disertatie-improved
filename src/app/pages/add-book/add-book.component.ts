@@ -21,6 +21,7 @@ export class AddBookComponent implements OnInit {
   accept = 'image/png, image/jpeg';
   generatedCode: string;
   books:Book[];
+  bookId;
 
   constructor(
     private readonly bookService: BookService,
@@ -28,23 +29,23 @@ export class AddBookComponent implements OnInit {
     private readonly router: Router,
   ) {
     this.formGroup = this.initForm();
-    this.books = JSON.parse(localStorage.getItem('books') as string);
   }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
+    this.books = JSON.parse(localStorage.getItem('books') as string);
     this.generatedCode = uuid.v4();
 
     if (this.formGroup.valid) {
       this.generatedCode = uuid.v4();
 
       const book: Book = {
-        id: (+books[books.length -1].id + 1).toString(),
+        id: (+this.books[this.books.length -1].id + 1).toString(),
         name: this.formGroup.controls.name.value,
         authors: this.parseAuthors(),
-        image: this.formGroup.controls.image.value,
+        image: "https://cdn.dc5.ro/img-prod/691149040-0.jpeg",
         description: this.formGroup.controls.description.value,
         count: this.formGroup.controls.count.value,
         type: this.formGroup.controls.type.value,

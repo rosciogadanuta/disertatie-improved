@@ -31,21 +31,6 @@ export class ExploreLibraryComponent implements OnInit {
       finalize(() => this.isLoading = false)
     ).subscribe(data => {
       this.books = data;
-      this.books.map(book=> ({ ...book, image : this.getImage(book.image)}))
     })
-  }
-
-  private getImage (imageBook: File | string): string | File {
-    let newImage;
-    if(typeof imageBook === 'string') {
-      newImage = imageBook
-    } else {
-      const reader = new FileReader();
-      reader.readAsDataURL(imageBook);
-      reader.onload = () => {
-        newImage =  reader.result as string;
-      };
-    }
-    return newImage;
   }
 }

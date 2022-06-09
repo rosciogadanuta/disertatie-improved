@@ -17,7 +17,6 @@ export class BookDetailsComponent implements OnInit {
   book: Book;
   image: string;
   isLoading = false;
-  @ViewChild('imageElement', {static: false}) el: ElementRef<HTMLImageElement>;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -41,33 +40,19 @@ export class BookDetailsComponent implements OnInit {
       this.isLoading = false
     )).subscribe(data => {
       this.book = data;
-      this.getImage(this.book.image);
     })
   }
 
   reserveBook() {
-    this.dialog.open(ReserveBookDialogComponent, {
+    const dialog = this.dialog.open(ReserveBookDialogComponent, {
       width: '500px',
       data: {book: this.book},
     });
+
+    dialog.afterClosed().subscribe(() => this.getBookById(this.bookId));
   }
 
   onBack() {
     this.location.back();
-  }
-
-  private getImage(imageBook: File | string) {
-    console.log(imageBook)
-    if (typeof imageBook === 'string') {
-      this.image = imageBook;
-    } else {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.image = reader.result as string;
-      };
-      if (imageBook) {
-        reader.readAsDataURL(imageBook);
-      }
-    }
   }
 }

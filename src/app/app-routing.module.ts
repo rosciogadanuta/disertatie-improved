@@ -13,12 +13,12 @@ import {Role} from "./models/role";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent, canActivate: [AuthGuard]},
+  {path: 'book/:id', component: BookDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'add-book', component: AddBookComponent, canActivate: [AuthGuard], data: {role: Role.Admin}},
+  {path: 'delete-book', component: DeleteBookComponent, canActivate: [AuthGuard], data: {role: Role.Admin}},
   {path: 'explore-library', component: ExploreLibraryComponent, canActivate: [AuthGuard]},
   {path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard]},
   {path: 'faq', component: FaqComponent, canActivate: [AuthGuard]},
-  {path: 'add-book', component: AddBookComponent, canActivate: [AuthGuard], data: {role: Role.Admin}},
-  {path: 'delete-book', component: DeleteBookComponent, canActivate: [AuthGuard], data: {role: Role.Admin}},
-  {path: 'book/:id', component: BookDetailsComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginPageComponent},
   {path: '**', redirectTo: ''}
 ];

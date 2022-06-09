@@ -70,13 +70,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!isLoggedIn()) return unauthorized();
 
       let book = body;
-
-      console.log(body)
-
       let books = JSON.parse(localStorage.getItem('books') as string);
 
       books.push(book);
+
       localStorage.setItem('books', JSON.stringify(books));
+
+      console.log("1 salveaza noul books", books)
 
       return ok(JSON.parse(localStorage.getItem('books') as string));
     }
@@ -85,12 +85,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!isLoggedIn()) return unauthorized();
 
       let borrowBook = body;
-      let books = JSON.parse(localStorage.getItem('books') as string);
+      let books = JSON.parse(localStorage.getItem('books') as string);;
 
       borrowBook.count = borrowBook.count - 1;
       borrowBook.generatedCode = uuid.v4();
 
       Object.assign(books.find(x => x.id === borrowBook.bookId), borrowBook);
+
       localStorage.setItem('books', JSON.stringify(books));
 
       return ok(borrowBook);
