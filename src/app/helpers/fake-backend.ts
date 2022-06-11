@@ -36,6 +36,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return addBook();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
+        case url.includes('/delete-book') && method === 'DELETE':
+          return deteleBook();
         case url.endsWith('/books') && method === 'GET':
           return getBooks();
         case url.match(/\/book\/\d+$/) && method === 'GET':
@@ -76,7 +78,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       localStorage.setItem('books', JSON.stringify(books));
 
-      console.log("1 salveaza noul books", books)
 
       return ok(JSON.parse(localStorage.getItem('books') as string));
     }
@@ -113,6 +114,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const book = books.find(x => x.id === idFromUrl());
       return ok(book);
     }
+
+    function deteleBook() {
+      let books = JSON.parse(localStorage.getItem('books') as string);
+      if (!isLoggedIn()) return unauthorized();
+
+      const find = books.find(book => book.code === idFromUrl())
+
+      books = books.filter(book => book.code !== idFromUrl());
+
+      localStorage.setItem('books', JSON.stringify(books));
+
+      if(find) {
+        return ok(books)
+      } else return error('Acest cod nu exista');
+    }
+
 
     // helper functions
     function ok(body?) {

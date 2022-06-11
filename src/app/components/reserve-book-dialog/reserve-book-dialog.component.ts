@@ -58,7 +58,6 @@ export class ReserveBookDialogComponent implements OnInit {
     return {
       userId: this.currentUser.id,
       bookId: this.dialogData.book.id as string,
-      mentions: 'lalala',
       count: this.dialogData.book.count as string,
       numberOfDays: 12,
     }

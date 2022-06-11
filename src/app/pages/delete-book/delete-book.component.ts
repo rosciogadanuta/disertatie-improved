@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BookService} from "../../services/book.service";
 
 @Component({
   selector: 'app-delete-book',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteBookComponent implements OnInit {
 
-  constructor() { }
+  bookCode: string;
+  isDeleted = false;
+  error:string
+
+  constructor(
+    private readonly bookService: BookService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  onDeleteBook() {
+    this.error ="";
+    this.bookService.deleteBook(this.bookCode).subscribe(()=>{
+      this.isDeleting();
+    },
+      error => {this.error = error});
+  }
+
+  isDeleting() {
+    this.isDeleted = true;
+    this.bookCode = "";
+    setTimeout(()=>{this.isDeleted = false}, 1000);
+  }
 }

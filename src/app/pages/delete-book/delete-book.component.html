@@ -1,5 +1,20 @@
 <div class="background w-full h-full flex items-center justify-center">
-  <div class="w-3/4 h-5/6 rounded-xl bg-orange-50/90 flex flex-col overflow-auto overflow-auto ">
+  <div class="w-3/4 h-5/6 rounded-xl bg-orange-50/90 flex flex-col overflow-auto">
     <app-nav-bar></app-nav-bar>
+    <div class="w-full p-20">
+      <div class="flex flex-col items-center justify-center ">
+        <p class="w-1/2 text-center text-4xl font-medium text-amber-900">Sterge cartea</p>
+        <p class="w-1/2 mt-8 text-center text-normal font-medium text-zinc-600">Insereaza codul imprimat pe spatele
+          cartii pentru a sterge o carte din biblioteca online</p>
+        <div class="mt-8 w-1/2 flex justify-between items-baseline">
+          <mat-form-field class="w-3/4">
+            <input [(ngModel)]="bookCode" matInput placeholder="Codul cartii"/>
+          </mat-form-field>
+          <button class="bg-emerald-900 text-white h-10" mat-raised-button (click)="onDeleteBook()">Sterge</button>
+        </div>
+        <span *ngIf="isDeleted" class="w-1/2 mt-8 text-center text-sm text-zinc-600">Se sterge...</span>
+        <span *ngIf="error" class="w-1/2 mt-8 text-center text-sm text-zinc-600">{{this.error}}</span>
+      </div>
+    </div>
   </div>
 </div>

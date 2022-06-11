@@ -25,4 +25,8 @@ export class BookService {
   borrowBook(borrowBook: BorrowBook) {
     return this.http.put<any>(`${environment.apiUrl}/borrowBook`, borrowBook);
   }
+
+  deleteBook(id: string) {
+    return this.http.delete<any>(`${environment.apiUrl}/delete-book/${id}`);
+  }
 }

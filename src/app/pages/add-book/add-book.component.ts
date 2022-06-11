@@ -53,8 +53,6 @@ export class AddBookComponent implements OnInit {
         code: this.generatedCode
       }
 
-      console.log(book);
-
        this.bookService.addBook(book).subscribe(()=> {
          this.openAddBookDialog(this.generatedCode);
        });
